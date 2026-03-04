@@ -1,0 +1,20 @@
+class Solution {
+  public:
+   int majorityElement(vector<int>& arr) {
+    int n = arr.size();  
+
+   sort(arr.begin(),arr.end());
+   int count =0;
+   int candidate = arr[n/2];
+   
+   for(int num:arr){
+       if(num==candidate)
+       count ++;
+   }
+   if(count>n/2){
+       return candidate;
+   }
+   return -1;
+}
+
+};
