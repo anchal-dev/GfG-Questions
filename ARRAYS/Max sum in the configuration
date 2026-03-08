@@ -1,0 +1,24 @@
+class Solution {
+  public:
+    int maxSum(vector<int> &arr) {
+        // code here
+        
+        int n = arr.size();
+int res = INT_MIN;
+
+for (int i = 0; i < n; i++) {
+    int sum = 0;
+
+    for (int j = 0; j < n; j++) {
+        int index = (i + j) % n;
+        sum += j * arr[index];
+    }
+
+    res = max(res, sum);
+}
+
+return res;
+
+        
+    }
+};
