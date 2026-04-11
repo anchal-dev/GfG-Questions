@@ -1,0 +1,78 @@
+class Solution {
+public:
+
+    string below20[20] = {"", "one ", "two ", "three ", "four ",
+                         "five ", "six ", "seven ", "eight ",
+                         "nine ", "ten ", "eleven ", "twelve ",
+                         "thirteen ", "fourteen ", "fifteen ",
+                         "sixteen ", "seventeen ", "eighteen ",
+                         "nineteen "};
+
+    string tens[10] = {"", "", "twenty ", "thirty ", "forty ",
+                      "fifty ", "sixty ", "seventy ", "eighty ",
+                      "ninety "};
+
+    string helper(int n) {
+        string res = "";
+
+        if (n >= 100) {
+            res += below20[n / 100] + string("hundred ");
+            n %= 100;
+        }
+
+        if (n >= 20) {
+            res += tens[n / 10];
+            n %= 10;
+        }
+
+        if (n > 0) {
+            res += below20[n];
+        }
+
+        return res;
+    }
+
+    string capitalize(string s) {
+        bool newWord = true;
+
+        for (int i = 0; i < s.length(); i++) {
+            if (s[i] == ' ') newWord = true;
+            else if (newWord) {
+                s[i] = toupper(s[i]);
+                newWord = false;
+            }
+        }
+        return s;
+    }
+
+    string convertToWords(long n) {
+        if (n == 0) return "Zero";
+
+        string res = "";
+
+        if (n >= 1000000000) {
+            res += helper(n / 1000000000) + "billion ";
+            n %= 1000000000;
+        }
+
+        if (n >= 1000000) {
+            res += helper(n / 1000000) + "million ";
+            n %= 1000000;
+        }
+
+        if (n >= 1000) {
+            res += helper(n / 1000) + "thousand ";
+            n %= 1000;
+        }
+
+        if (n > 0) {
+            res += helper(n);
+        }
+
+        
+        if (!res.empty() && res.back() == ' ')
+            res.pop_back();
+
+        return capitalize(res);
+    }
+};
