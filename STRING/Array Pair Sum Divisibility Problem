@@ -1,0 +1,38 @@
+class Solution {
+public:
+   bool canPair(vector<int>& arr, int k)
+{
+    int n = arr.size();
+    
+   
+    if (n % 2 != 0)
+        return false;
+
+    unordered_map<int, int> freq;
+
+    for (int x : arr)
+        freq[((x % k) + k) % k]++;
+
+   
+    for (int x : arr) {
+        int rem = ((x % k) + k) % k;
+
+      
+        if (2 * rem == k) {
+            if (freq[rem] % 2 != 0)
+                return false;
+        }
+      
+        else if (rem == 0) {
+            if (freq[rem] % 2 != 0)
+                return false;
+        }
+      
+       
+        else if (freq[rem] != freq[k - rem])
+            return false;
+    }
+    return true;
+
+    }
+};
